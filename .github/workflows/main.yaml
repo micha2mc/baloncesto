@@ -42,7 +42,7 @@ jobs:
     steps:
       - name: calidad-codigo
         run: |
-          mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.qualitygate.wait=true -Dsonar.login=admin -Dsonar.password=admin
+          mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.qualitygate.wait=true -Dsonar.login=admin -Dsonar.password=rootpass
   deploy:
     needs: qa
     runs-on: ubuntu-latest
