@@ -7,17 +7,19 @@ public class Acb extends HttpServlet {
 
     private ModeloDatos bd;
 
+    @Override
     public void init(ServletConfig cfg) throws ServletException {
         bd = new ModeloDatos();
         bd.abrirConexion();
     }
 
+    @Override
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession s = req.getSession(true);
-        String nombreP = (String) req.getParameter("txtNombre");
-        String nombre = (String) req.getParameter("R1");
+        String nombreP = req.getParameter("txtNombre");
+        String nombre = req.getParameter("R1");
         if (nombre.equals("Otros")) {
-            nombre = (String) req.getParameter("txtOtros");
+            nombre = req.getParameter("txtOtros");
         }
         if (bd.existeJugador(nombre)) {
             bd.actualizarJugador(nombre);
@@ -28,7 +30,7 @@ public class Acb extends HttpServlet {
         // Llamada a la página jsp que nos da las gracias
         res.sendRedirect(res.encodeRedirectURL("TablaVotos.jsp"));
     }
-
+    @Override
     public void destroy() {
         bd.cerrarConexion();
         super.destroy();

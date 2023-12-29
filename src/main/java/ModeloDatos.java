@@ -1,6 +1,12 @@
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
+
 import java.sql.*;
 
 public class ModeloDatos {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ModeloDatos.class);
+    private static final String MESSAGE_ERROR = "El error es: ";
 
     private Connection con;
     private Statement set;
@@ -23,8 +29,8 @@ public class ModeloDatos {
 
         } catch (Exception e) {
             // No se ha conectado
-            System.out.println("No se ha podido conectar");
-            System.out.println("El error es: " + e.getMessage());
+            LOGGER.error("No se ha podido conectar");
+            LOGGER.error(MESSAGE_ERROR + e.getMessage());
         }
     }
 
@@ -45,35 +51,40 @@ public class ModeloDatos {
             set.close();
         } catch (Exception e) {
             // No lee de la tabla
-            System.out.println("No lee de la tabla");
-            System.out.println("El error es: " + e.getMessage());
+            LOGGER.error("No lee de la tabla");
+            LOGGER.error(MESSAGE_ERROR + e.getMessage());
         }
         return (existe);
     }
 
     public void actualizarJugador(String nombre) {
-        try {
-            set = con.createStatement();
-            set.executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre " + " LIKE '%" + nombre + "%'");
+        String query = "UPDATE Jugadores SET votos=votos+1 WHERE nombre  LIKE ?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+
+            preparedStatement.setString(1, "%" + nombre + "%");
+            preparedStatement.executeUpdate();
             rs.close();
             set.close();
         } catch (Exception e) {
             // No modifica la tabla
-            System.out.println("No modifica la tabla");
-            System.out.println("El error es: " + e.getMessage());
+
+            LOGGER.error("No modifica la tabla");
+            LOGGER.error(MESSAGE_ERROR + e.getMessage());
         }
     }
 
     public void insertarJugador(String nombre) {
-        try {
-            set = con.createStatement();
-            set.executeUpdate("INSERT INTO Jugadores " + " (nombre,votos) VALUES ('" + nombre + "',1)");
+        String sql = "INSERT INTO Jugadores  (nombre, votos) VALUES (?, ?)";
+        try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setInt(2, 1);
+            preparedStatement.executeUpdate();
             rs.close();
             set.close();
         } catch (Exception e) {
             // No inserta en la tabla
-            System.out.println("No inserta en la tabla");
-            System.out.println("El error es: " + e.getMessage());
+            LOGGER.error("No inserta en la tabla");
+            LOGGER.error(MESSAGE_ERROR + e.getMessage());
         }
     }
 
@@ -81,7 +92,7 @@ public class ModeloDatos {
         try {
             con.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
     }
 
