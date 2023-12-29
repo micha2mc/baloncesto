@@ -38,7 +38,7 @@ jobs:
   qa:
     needs: test
     runs-on: self-hosted
-    continue-on-error: true
+    continue-on-error: false
     steps:
       - name: calidad-codigo
         run: |
