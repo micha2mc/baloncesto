@@ -52,9 +52,11 @@ public class ModeloDatos {
     }
 
     public void actualizarJugador(String nombre) {
+        String query = "UPDATE Jugadores SET votos=votos+1 WHERE nombre  LIKE ?";
         try {
-            set = con.createStatement();
-            set.executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre " + " LIKE '%" + nombre + "%'");
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, "%" + nombre + "%");
+            preparedStatement.executeUpdate();
             rs.close();
             set.close();
         } catch (Exception e) {
@@ -65,9 +67,12 @@ public class ModeloDatos {
     }
 
     public void insertarJugador(String nombre) {
+        String sql = "INSERT INTO Jugadores  (nombre, votos) VALUES (?, ?)";
         try {
-            set = con.createStatement();
-            set.executeUpdate("INSERT INTO Jugadores " + " (nombre,votos) VALUES ('" + nombre + "',1)");
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setInt(2, 1);
+            preparedStatement.executeUpdate();
             rs.close();
             set.close();
         } catch (Exception e) {
