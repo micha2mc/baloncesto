@@ -1,5 +1,8 @@
+import lombok.extern.slf4j.Slf4j;
+
 import java.sql.*;
 
+@Slf4j
 public class ModeloDatos {
 
     private Connection con;
