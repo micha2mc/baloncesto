@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="model.Jugador" %>
+<%@ page import="model.dto.Jugador" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +33,9 @@
 %>
     <table aria-describedby="jugadores">
         <tr>
-            <td class="cabecera">ID</td>
-            <td class="cabecera">Nombre</td>
-            <td class="cabecera">Votos</td>
+            <th scope="col" class="cabecera">ID</th>
+            <th scope="col" class="cabecera">Nombre</th>
+            <th scope="col" class="cabecera">Votos</th>
         </tr>
         <% for (Jugador jugador: jugadores) {%>
         <tr>

@@ -1,4 +1,6 @@
-import model.Jugador;
+package model;
+
+import model.dto.Jugador;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,7 +10,7 @@ import java.util.List;
 
 public class ModeloDatos {
 
-    private static final Logger logger = LogManager.getLogger("ModeloDatos");
+    private static final Logger logger = LogManager.getLogger("model.ModeloDatos");
     private static final String MESSAGE_ERROR = "El error es: {}";
 
     private Connection con;
