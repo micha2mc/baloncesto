@@ -19,7 +19,20 @@
 %>
 <body>
 
-<%=jugadores%>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Votos</td>
+        </tr>
+        <% for (Jugador jugador: jugadores) {%>
+        <tr>
+            <td><%=jugador.getId()%></td>
+            <td><%=jugador.getNombre()%></td>
+            <td><%=jugador.getVotos()%></td>
+        </tr>
+        <%}%>
+    </table>
 
 </body>
 </html>

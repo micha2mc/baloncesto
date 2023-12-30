@@ -108,16 +108,22 @@ public class ModeloDatos {
         }
     }
 
-    public List<Jugador> getAllJugadores(){
+    public List<Jugador> getAllJugadores() {
         List<Jugador> listJug = new ArrayList<>();
+        System.out.print("Method getAllJugadores start");
         try {
             set = con.createStatement();
             rs = set.executeQuery("SELECT * FROM Jugadores");
-            while (rs.next()){
+            System.out.print("Inside try");
+            while (rs.next()) {
                 int id = rs.getInt("id");
+                System.out.print("ID: " + rs.getInt("id"));
                 String nombre = rs.getString("nombre");
+                System.out.print("Nombre: " + rs.getString("nombre"));
                 int votos = rs.getInt("votos");
+                System.out.print("VOTOS: " + rs.getInt("votos"));
                 Jugador jugador = new Jugador(id, nombre, votos);
+
                 listJug.add(jugador);
             }
             rs.close();
