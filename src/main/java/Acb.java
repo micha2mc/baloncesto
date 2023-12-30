@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
-public class Acb extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class Acb extends HttpServlet implements Serializable {
 
     private ModeloDatos bd;
 
@@ -21,7 +21,7 @@ public class Acb extends HttpServlet {
     }
 
     @Override
-    public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    public void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
         HttpSession s = req.getSession(true);
         String nombreP = req.getParameter("txtNombre");
         String nombre = req.getParameter("R1");

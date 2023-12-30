@@ -9,7 +9,7 @@ import java.util.List;
 public class ModeloDatos {
 
     private static final Logger logger = LogManager.getLogger("ModeloDatos");
-    private static final String MESSAGE_ERROR = "El error es: ";
+    private static final String MESSAGE_ERROR = "El error es: {}";
 
     private Connection con;
     private Statement set;
@@ -33,7 +33,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No se ha conectado
             logger.info("No se ha podido conectar");
-            logger.error(MESSAGE_ERROR + e.getMessage());
+            logger.error(MESSAGE_ERROR, e.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No lee de la tabla
             logger.info("No lee de la tabla");
-            logger.error(MESSAGE_ERROR + e.getMessage());
+            logger.error(MESSAGE_ERROR, e.getMessage());
         }
         return (existe);
     }
@@ -72,7 +72,7 @@ public class ModeloDatos {
             // No modifica la tabla
 
             logger.info("No modifica la tabla");
-            logger.error(MESSAGE_ERROR + e.getMessage());
+            logger.error(MESSAGE_ERROR, e.getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No inserta en la tabla
             logger.info("No inserta en la tabla");
-            logger.error(MESSAGE_ERROR + e.getMessage());
+            logger.error(MESSAGE_ERROR, e.getMessage());
         }
     }
 
@@ -106,18 +106,18 @@ public class ModeloDatos {
             rs.close();
             set.close();
         } catch (Exception e) {
-            logger.error(MESSAGE_ERROR + e.getMessage());
+            logger.error(MESSAGE_ERROR, e.getMessage());
         }
     }
 
     public List<Jugador> getAllJugadores() {
         List<Jugador> listJug = new ArrayList<>();
+        logger.info("Method getAllJugadores start");
         try {
             set = con.createStatement();
             rs = set.executeQuery("SELECT * FROM Jugadores");
             while (rs.next()) {
                 int id = rs.getInt("id");
-                System.out.print("ID: " + rs.getInt("id"));
                 String nombre = rs.getString("nombre");
                 int votos = rs.getInt("votos");
                 Jugador jugador = new Jugador(id, nombre, votos);
@@ -127,7 +127,7 @@ public class ModeloDatos {
             rs.close();
             set.close();
         } catch (Exception e) {
-            logger.error(MESSAGE_ERROR + e.getMessage());
+            logger.error(MESSAGE_ERROR, e.getMessage());
         }
         return listJug;
     }
