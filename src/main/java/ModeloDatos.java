@@ -1,11 +1,7 @@
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
-
 import java.sql.*;
 
 public class ModeloDatos {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ModeloDatos.class);
     private static final String MESSAGE_ERROR = "El error es: ";
 
     private Connection con;
@@ -29,8 +25,8 @@ public class ModeloDatos {
 
         } catch (Exception e) {
             // No se ha conectado
-            LOGGER.error("No se ha podido conectar");
-            LOGGER.error(MESSAGE_ERROR + e.getMessage());
+            System.err.println("No se ha podido conectar");
+            System.err.println(MESSAGE_ERROR + e.getMessage());
         }
     }
 
@@ -51,8 +47,8 @@ public class ModeloDatos {
             set.close();
         } catch (Exception e) {
             // No lee de la tabla
-            LOGGER.error("No lee de la tabla");
-            LOGGER.error(MESSAGE_ERROR + e.getMessage());
+            System.err.println("No lee de la tabla");
+            System.err.println(MESSAGE_ERROR + e.getMessage());
         }
         return (existe);
     }
@@ -68,8 +64,8 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No modifica la tabla
 
-            LOGGER.error("No modifica la tabla");
-            LOGGER.error(MESSAGE_ERROR + e.getMessage());
+            System.err.println("No modifica la tabla");
+            System.err.println(MESSAGE_ERROR + e.getMessage());
         }
     }
 
@@ -83,8 +79,8 @@ public class ModeloDatos {
             set.close();
         } catch (Exception e) {
             // No inserta en la tabla
-            LOGGER.error("No inserta en la tabla");
-            LOGGER.error(MESSAGE_ERROR + e.getMessage());
+            System.err.println("No inserta en la tabla");
+            System.err.println(MESSAGE_ERROR + e.getMessage());
         }
     }
 
@@ -92,7 +88,7 @@ public class ModeloDatos {
         try {
             con.close();
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
