@@ -15,7 +15,7 @@
 </head>
 <%
     //obtenemos todos los jugadores
-    List<Jugador> jugadores = (List<Jugador>) request.getAttribute("jugadores");
+    List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
 %>
 <body>
 
