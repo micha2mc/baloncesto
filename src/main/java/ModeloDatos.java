@@ -1,4 +1,8 @@
+import model.Jugador;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModeloDatos {
 
@@ -99,8 +103,33 @@ public class ModeloDatos {
             rs.close();
             set.close();
         } catch (Exception e) {
-            System.err.println("No modifica la tabla");
             System.err.println(MESSAGE_ERROR + e.getMessage());
         }
+    }
+
+    public List<Jugador> getAllJugadores() {
+        List<Jugador> listJug = new ArrayList<>();
+        System.out.print("Method getAllJugadores start");
+        try {
+            set = con.createStatement();
+            rs = set.executeQuery("SELECT * FROM Jugadores");
+            System.out.print("Inside try");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                System.out.print("ID: " + rs.getInt("id"));
+                String nombre = rs.getString("nombre");
+                //System.out.print("Nombre: " + rs.getString("nombre"));
+                int votos = rs.getInt("votos");
+                //System.out.print("VOTOS: " + rs.getInt("votos"));
+                Jugador jugador = new Jugador(id, nombre, votos);
+
+                listJug.add(jugador);
+            }
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            System.err.println(MESSAGE_ERROR + e.getMessage());
+        }
+        return listJug;
     }
 }
