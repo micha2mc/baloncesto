@@ -30,7 +30,7 @@ public class Acb extends HttpServlet {
             List<Jugador> listJugadores = bd.getAllJugadores();
             s.setAttribute("jugadores", listJugadores);
             // Llamada a la página jsp con la tabla de Votos
-            res.sendRedirect(res.encodeRedirectURL("verVotos.jsp"));
+            res.sendRedirect(res.encodeRedirectURL("VerVotos.jsp"));
         } else {
             if (nombre.equals("Otros")) {
                 nombre = req.getParameter("txtOtros");
