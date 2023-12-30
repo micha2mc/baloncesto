@@ -23,6 +23,7 @@ public class Acb extends HttpServlet {
         String nombre = req.getParameter("R1");
         String resetVotos = req.getParameter("B3");
         if ("B3".equalsIgnoreCase(resetVotos)) {
+            bd.resetVotos();
             res.sendRedirect(res.encodeRedirectURL("index.html"));
         } else {
             if (nombre.equals("Otros")) {
