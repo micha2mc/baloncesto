@@ -1,7 +1,4 @@
-package controller;
-
-import model.dto.Jugador;
-import model.ModeloDatos;
+import model.Jugador;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
