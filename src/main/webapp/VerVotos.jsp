@@ -12,27 +12,42 @@
 <html lang="en">
 <head>
     <title>Listado de votos</title>
+    <style type="text/css">
+        .cabecera {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #FFFFFF;
+            background-color: #08088A;
+        }
+        .filas {
+            text-align: center;
+            background-color: #5882FA;
+        }
+    </style>
 </head>
+
+<body>
 <%
     //obtenemos todos los jugadores
     List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
 %>
-<body>
-
     <table aria-describedby="jugadores">
         <tr>
-            <td>ID</td>
-            <td>Nombre</td>
-            <td>Votos</td>
+            <td class="cabecera">ID</td>
+            <td class="cabecera">Nombre</td>
+            <td class="cabecera">Votos</td>
         </tr>
         <% for (Jugador jugador: jugadores) {%>
         <tr>
-            <td><%=jugador.getId()%></td>
-            <td><%=jugador.getNombre()%></td>
-            <td><%=jugador.getVotos()%></td>
+            <td class="filas"><%=jugador.getId()%></td>
+            <td class="filas"><%=jugador.getNombre()%></td>
+            <td class="filas"><%=jugador.getVotos()%></td>
         </tr>
         <%}%>
     </table>
+
+<br>
+<br> <a href="index.html"> Ir al comienzo</a>
 
 </body>
 </html>
