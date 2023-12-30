@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public class Acb extends HttpServlet {
 
@@ -25,6 +26,11 @@ public class Acb extends HttpServlet {
         if ("B3".equalsIgnoreCase(resetVotos)) {
             bd.resetVotos();
             res.sendRedirect(res.encodeRedirectURL("index.html"));
+        } else if ("B4".equalsIgnoreCase(req.getParameter("B4"))) {
+            List<Jugador> listJugadores = bd.getAllJugadores();
+            s.setAttribute("jugadores", listJugadores);
+            // Llamada a la página jsp con la tabla de Votos
+            res.sendRedirect(res.encodeRedirectURL("verVotos.jsp"));
         } else {
             if (nombre.equals("Otros")) {
                 nombre = req.getParameter("txtOtros");
