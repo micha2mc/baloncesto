@@ -92,4 +92,15 @@ public class ModeloDatos {
         }
     }
 
+    public void resetVotos() {
+        String query = "UPDATE Jugadores SET votos=0";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            System.err.println("No modifica la tabla");
+            System.err.println(MESSAGE_ERROR + e.getMessage());
+        }
+    }
 }
