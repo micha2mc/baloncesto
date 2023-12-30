@@ -103,7 +103,6 @@ public class ModeloDatos {
             rs.close();
             set.close();
         } catch (Exception e) {
-            System.err.println("No modifica la tabla");
             System.err.println(MESSAGE_ERROR + e.getMessage());
         }
     }
@@ -119,9 +118,9 @@ public class ModeloDatos {
                 int id = rs.getInt("id");
                 System.out.print("ID: " + rs.getInt("id"));
                 String nombre = rs.getString("nombre");
-                System.out.print("Nombre: " + rs.getString("nombre"));
+                //System.out.print("Nombre: " + rs.getString("nombre"));
                 int votos = rs.getInt("votos");
-                System.out.print("VOTOS: " + rs.getInt("votos"));
+                //System.out.print("VOTOS: " + rs.getInt("votos"));
                 Jugador jugador = new Jugador(id, nombre, votos);
 
                 listJug.add(jugador);
@@ -129,7 +128,6 @@ public class ModeloDatos {
             rs.close();
             set.close();
         } catch (Exception e) {
-            System.err.println("No modifica la tabla");
             System.err.println(MESSAGE_ERROR + e.getMessage());
         }
         return listJug;

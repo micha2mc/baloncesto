@@ -19,7 +19,7 @@
 %>
 <body>
 
-    <table>
+    <table aria-describedby="jugadores">
         <tr>
             <td>ID</td>
             <td>Nombre</td>
