@@ -54,11 +54,10 @@ public class ModeloDatos {
     }
 
     public void actualizarJugador(String nombre) {
-        int numeroVotos = getNumeroVotos(nombre);
-        String query = "UPDATE Jugadores SET votos=? WHERE nombre  LIKE ?";
+        String query = "UPDATE Jugadores SET votos=votos+1 WHERE nombre  LIKE ?";
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-            preparedStatement.setInt(1, numeroVotos + 1);
-            preparedStatement.setString(2, "%" + nombre + "%");
+
+            preparedStatement.setString(1, "%" + nombre + "%");
             preparedStatement.executeUpdate();
             rs.close();
             set.close();
@@ -91,25 +90,6 @@ public class ModeloDatos {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-    }
-
-    private int getNumeroVotos(String nombre) {
-        int number = 0;
-        String querySelect = "SELECT * FROM Jugadores WHERE nombre = ?";
-        try (PreparedStatement preparedStatement = con.prepareStatement(querySelect)) {
-            preparedStatement.setString(1, nombre);
-            rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                number = rs.getInt("votos");
-            }
-            rs.close();
-            set.close();
-        } catch (Exception e) {
-            // No inserta en la tabla
-            System.err.println("No inserta en la tabla");
-            System.err.println(MESSAGE_ERROR + e.getMessage());
-        }
-        return number;
     }
 
 }
