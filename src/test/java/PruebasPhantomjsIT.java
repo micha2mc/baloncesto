@@ -60,7 +60,7 @@ class PruebasPhantomjsIT {
     }
 
     @Test
-    void botonOtroTest() {
+    void botonOtroTest() throws InterruptedException {
         By radioOtrosLocator = By.xpath("//input[@value='Otros']");
         By nameOtrosLocator = By.name("txtOtros");
         String nombreNuevoJuagor = "Test";
@@ -73,6 +73,7 @@ class PruebasPhantomjsIT {
 
         //2.- Confirmar página "Gracias" y volver a la página principal
         if (driver.findElement(By.className("resultado")).isDisplayed()) {
+            Thread.sleep(2000);
             driver.findElement(By.linkText("Ir al comienzo"));
             //3.- click en el boton ver votos y comprobacion de votos del nuevo jugador.
             driver.findElement(By.name("B4")).click();
