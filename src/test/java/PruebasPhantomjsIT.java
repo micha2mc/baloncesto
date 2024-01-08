@@ -80,7 +80,7 @@ class PruebasPhantomjsIT {
             if (driver.findElement(registerPageLocator).isDisplayed()) {
                 System.out.println("Ver la tabla de votos");
                 List<WebElement> listaFilas = driver.findElements(By.className("filas"));
-                for (int i = 0; i <= listaFilas.size(); i++) {
+                for (int i = 0; i < listaFilas.size(); i++) {
                     if (nombreNuevoJuagor.equalsIgnoreCase(listaFilas.get(i).getText())) {
                         System.out.println("Nombre del nuevo jugador encontrado");
                         assertEquals("1", listaFilas.get(i + 1).getText());
