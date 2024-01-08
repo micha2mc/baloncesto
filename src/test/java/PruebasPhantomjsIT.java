@@ -51,7 +51,9 @@ class PruebasPhantomjsIT {
         //3.- Localiza la nueva página
         if(driver.findElement(registerPageLocator).isDisplayed()){
             List<WebElement> listaFilas = driver.findElements(By.className("filas"));
-            System.out.println(listaFilas);
+            for (WebElement webElement: listaFilas){
+                System.out.println(webElement.getText());
+            }
         }
 
         driver.close();
