@@ -73,11 +73,12 @@ class PruebasPhantomjsIT {
 
         //2.- Confirmar página "Gracias" y volver a la página principal
         if (driver.findElement(By.className("resultado")).isDisplayed()) {
-            Thread.sleep(2000);
-            driver.findElement(By.linkText("Ir al comienzo"));
+            System.out.println("Pagina de las Gracias");
+            driver.findElement(By.linkText("Ir al comienzo")).click();
             //3.- click en el boton ver votos y comprobacion de votos del nuevo jugador.
             driver.findElement(By.name("B4")).click();
             if (driver.findElement(registerPageLocator).isDisplayed()) {
+                System.out.println("Ver la tabla de votos");
                 List<WebElement> listaFilas = driver.findElements(By.className("filas"));
                 for (int i = 0; i <= listaFilas.size(); i++) {
                     if (nombreNuevoJuagor.equalsIgnoreCase(listaFilas.get(i).getText())) {
