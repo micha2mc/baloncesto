@@ -36,7 +36,7 @@ class PruebasPhantomjsIT {
     }
 
     @Test
-    void botonIndexTest() {
+    void botonVotosCeroTest() {
 
         //1.- Localizo el boton "poner votos a cero" y es pulsado
         driver.findElement(By.name("B3")).click();
@@ -44,12 +44,12 @@ class PruebasPhantomjsIT {
 
         //2.- Localizo el boton "ver votos" y es pulsado
         driver.findElement(By.name("B4")).click();
-
+        System.out.println("botón verVotos pulsado");
         //3.- Localiza la nueva página (tabla) y compruebo los valores de los votos
         if (driver.findElement(registerPageLocator).isDisplayed()) {
             List<WebElement> listaFilas = driver.findElements(By.className("filas"));
             for (int i = 2; i <= listaFilas.size(); ) {
-                System.out.println("Nmbre del jugador: " + listaFilas.get(i - 1).getText());
+                System.out.println("Nombre del jugador: " + listaFilas.get(i - 1).getText());
                 assertEquals("0", listaFilas.get(i).getText());
                 i = i + 3;
             }
