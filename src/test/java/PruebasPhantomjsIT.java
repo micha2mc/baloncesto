@@ -40,7 +40,7 @@ class PruebasPhantomjsIT {
 
         //1.- Localizo el boton "poner votos a cero" y es pulsado
         driver.findElement(By.name("B3")).click();
-        System.out.println("Votos reseteatos");
+        System.out.println("Votos reseteados");
 
         //2.- Localizo el boton "ver votos" y es pulsado
         driver.findElement(By.name("B4")).click();
@@ -53,6 +53,8 @@ class PruebasPhantomjsIT {
                 assertEquals("0", listaFilas.get(i).getText());
                 i = i + 3;
             }
+        }else{
+            System.out.println("Tabla no localizada.");
         }
     }
 
