@@ -16,7 +16,7 @@ class PruebasPhantomjsIT {
     private static final String URL = "http://localhost:8080/Baloncesto/";
     private static WebDriver driver = null;
 
-    By registerPageLocator = By.xpath("//table[@aria-describedby='jugadores']");
+    private final By registerPageLocator = By.xpath("//table[@aria-describedby='jugadores']");
 
 
     @BeforeEach
@@ -33,7 +33,6 @@ class PruebasPhantomjsIT {
     void tituloIndexTest() {
         assertEquals("Votacion mejor jugador liga ACB", driver.getTitle(), "El titulo no es correcto");
         System.out.println(driver.getTitle());
-
     }
 
     @Test
