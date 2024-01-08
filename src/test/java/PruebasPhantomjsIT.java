@@ -49,10 +49,11 @@ class PruebasPhantomjsIT {
         System.out.println("Boton ver todos clickeado");
 
         //3.- Localiza la nueva página
-        if(driver.findElement(registerPageLocator).isDisplayed()){
+        if (driver.findElement(registerPageLocator).isDisplayed()) {
             List<WebElement> listaFilas = driver.findElements(By.className("filas"));
-            for (WebElement webElement: listaFilas){
-                System.out.println(webElement.getText());
+            for (int i = 2; i <= listaFilas.size(); ) {
+                assertEquals("0", listaFilas.get(i).getText());
+                i=i+3;
             }
         }
 
