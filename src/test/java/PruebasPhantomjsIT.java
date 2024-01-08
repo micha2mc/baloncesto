@@ -16,7 +16,8 @@ class PruebasPhantomjsIT {
     private static final String URL = "http://localhost:8080/Baloncesto/";
     private static WebDriver driver = null;
 
-    By registerPageLocator = By.xpath("//table[@aria-describedby='jugadores']");
+    private final By registerPageLocator = By.xpath("//table[@aria-describedby='jugadores']");
+
 
     @BeforeEach
     void setUp() {
@@ -32,7 +33,6 @@ class PruebasPhantomjsIT {
     void tituloIndexTest() {
         assertEquals("Votacion mejor jugador liga ACB", driver.getTitle(), "El titulo no es correcto");
         System.out.println(driver.getTitle());
-
     }
 
     @Test
@@ -53,8 +53,41 @@ class PruebasPhantomjsIT {
                 assertEquals("0", listaFilas.get(i).getText());
                 i = i + 3;
             }
-        }else{
+        } else {
             System.out.println("Tabla no localizada.");
+        }
+    }
+
+    @Test
+    void botonOtroTest() throws InterruptedException {
+        By radioOtrosLocator = By.xpath("//input[@value='Otros']");
+        By nameOtrosLocator = By.name("txtOtros");
+        String nombreNuevoJuagor = "Test";
+
+        //1.- seleccion de Otros, insercion de nuevo jugador y click en Votar
+        driver.findElement(radioOtrosLocator).click();
+        driver.findElement(nameOtrosLocator).sendKeys(nombreNuevoJuagor);
+        driver.findElement(By.name("B1")).click();
+        System.out.println("Boton votar pulsado");
+
+        //2.- Confirmar página "Gracias" y volver a la página principal
+        if (driver.findElement(By.className("resultado")).isDisplayed()) {
+            System.out.println("Pagina de las Gracias");
+            driver.findElement(By.linkText("Ir al comienzo")).click();
+            //3.- click en el boton ver votos y comprobacion de votos del nuevo jugador.
+            driver.findElement(By.name("B4")).click();
+            if (driver.findElement(registerPageLocator).isDisplayed()) {
+                System.out.println("Ver la tabla de votos");
+                List<WebElement> listaFilas = driver.findElements(By.className("filas"));
+                for (int i = 0; i < listaFilas.size(); i++) {
+                    if (nombreNuevoJuagor.equalsIgnoreCase(listaFilas.get(i).getText())) {
+                        System.out.println("Nombre del nuevo jugador encontrado");
+                        assertEquals("1", listaFilas.get(i + 1).getText());
+                    }
+                }
+            }
+        } else {
+            System.out.println("Nuevo jugador no insertado.");
         }
     }
 
