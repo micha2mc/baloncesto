@@ -16,6 +16,8 @@ import static org.mockito.Mockito.when;
 
 class ModeloDatosTest {
 
+    @InjectMocks
+    private ModeloDatos modeloDatos;
     @Mock
     Connection mockConnection;
 
@@ -24,8 +26,6 @@ class ModeloDatosTest {
 
     @Mock
     PreparedStatement mockPreparedStatement;
-    @InjectMocks
-    private ModeloDatos modeloDatos;
 
     @BeforeEach
     void setUp() throws Exception {
