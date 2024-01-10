@@ -13,6 +13,7 @@ import java.util.List;
 public class Acb extends HttpServlet implements Serializable {
 
     private ModeloDatos bd;
+    private VotosService votosService;
 
     @Override
     public void init(ServletConfig cfg) throws ServletException {
@@ -39,7 +40,8 @@ public class Acb extends HttpServlet implements Serializable {
                 nombre = req.getParameter("txtOtros");
             }
             if (bd.existeJugador(nombre)) {
-                bd.actualizarJugador(nombre);
+                int sumVotos = votosService.sumarVotos(nombre);
+                bd.actualizarJugador(nombre, sumVotos);
             } else {
                 bd.insertarJugador(nombre);
             }
