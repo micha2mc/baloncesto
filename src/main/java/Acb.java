@@ -1,4 +1,6 @@
 import model.Jugador;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,7 +14,10 @@ import java.util.List;
 
 public class Acb extends HttpServlet implements Serializable {
 
+    private static final Logger logger = LogManager.getLogger("Acb");
     private ModeloDatos bd;
+
+
 
     @Override
     public void init(ServletConfig cfg) throws ServletException {
@@ -39,8 +44,10 @@ public class Acb extends HttpServlet implements Serializable {
                 nombre = req.getParameter("txtOtros");
             }
             if (bd.existeJugador(nombre)) {
+                logger.info("Opcion sumar votos");
                 bd.actualizarJugador(nombre);
             } else {
+                logger.info("Opcion insertar nuevo jugador");
                 bd.insertarJugador(nombre);
             }
             s.setAttribute("nombreCliente", nombreP);
