@@ -15,6 +15,10 @@ public class Acb extends HttpServlet implements Serializable {
     private ModeloDatos bd;
     private VotosService votosService;
 
+    public Acb(VotosService votosService) {
+        this.votosService = votosService;
+    }
+
     @Override
     public void init(ServletConfig cfg) throws ServletException {
         bd = new ModeloDatos();
