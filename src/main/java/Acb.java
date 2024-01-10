@@ -16,11 +16,8 @@ public class Acb extends HttpServlet implements Serializable {
 
     private static final Logger logger = LogManager.getLogger("Acb");
     private ModeloDatos bd;
-    private VotosService votosService;
 
-    public Acb(VotosService votosService) {
-        this.votosService = votosService;
-    }
+
 
     @Override
     public void init(ServletConfig cfg) throws ServletException {
@@ -48,8 +45,7 @@ public class Acb extends HttpServlet implements Serializable {
             }
             if (bd.existeJugador(nombre)) {
                 logger.info("Opcion sumar votos");
-                int sumVotos = votosService.sumarVotos(nombre);
-                bd.actualizarJugador(nombre, sumVotos);
+                bd.actualizarJugador(nombre);
             } else {
                 logger.info("Opcion insertar nuevo jugador");
                 bd.insertarJugador(nombre);

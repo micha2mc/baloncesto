@@ -60,12 +60,11 @@ public class ModeloDatos implements DataService {
         return (existe);
     }
 
-    public void actualizarJugador(String nombre, int sumVotos) {
-        String query = "UPDATE Jugadores SET votos=? WHERE nombre  LIKE ?";
+    public void actualizarJugador(String nombre) {
+        String query = "UPDATE Jugadores SET votos=votos+1 WHERE nombre  LIKE ?";
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, sumVotos);
-            preparedStatement.setString(2, "%" + nombre + "%");
+            preparedStatement.setString(1, "%" + nombre + "%");
             preparedStatement.executeUpdate();
             rs.close();
             set.close();
