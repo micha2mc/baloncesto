@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModeloDatos implements DataService{
+public class ModeloDatos implements DataService {
 
     private static final Logger logger = LogManager.getLogger("ModeloDatos");
     private static final String MESSAGE_ERROR = "El error es: {}";
