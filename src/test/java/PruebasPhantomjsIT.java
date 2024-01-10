@@ -31,13 +31,14 @@ class PruebasPhantomjsIT {
 
     @Test
     void tituloIndexTest() {
+        System.out.println("************************tituloIndexTest*******************");
         assertEquals("Votacion mejor jugador liga ACB", driver.getTitle(), "El titulo no es correcto");
         System.out.println(driver.getTitle());
     }
 
     @Test
     void botonVotosCeroTest() {
-
+        System.out.println("************************botonVotosCeroTest*******************");
         //1.- Localizo el boton "poner votos a cero" y es pulsado
         driver.findElement(By.name("B3")).click();
         System.out.println("Votos reseteados");
@@ -60,6 +61,7 @@ class PruebasPhantomjsIT {
 
     @Test
     void botonOtroTest() throws InterruptedException {
+        System.out.println("************************botonOtroTest*******************");
         By radioOtrosLocator = By.xpath("//input[@value='Otros']");
         By nameOtrosLocator = By.name("txtOtros");
         String nombreNuevoJuagor = "Test";
@@ -69,6 +71,7 @@ class PruebasPhantomjsIT {
         driver.findElement(nameOtrosLocator).sendKeys(nombreNuevoJuagor);
         driver.findElement(By.name("B1")).click();
         System.out.println("Boton votar pulsado");
+        Thread.sleep(2000);
 
         //2.- Confirmar página "Gracias" y volver a la página principal
         if (driver.findElement(By.className("resultado")).isDisplayed()) {

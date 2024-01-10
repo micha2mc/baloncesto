@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModeloDatos {
+public class ModeloDatos implements DataService {
 
     private static final Logger logger = LogManager.getLogger("ModeloDatos");
     private static final String MESSAGE_ERROR = "El error es: {}";
@@ -130,5 +130,26 @@ public class ModeloDatos {
             logger.error(MESSAGE_ERROR, e.getMessage());
         }
         return listJug;
+    }
+
+    @Override
+    public int getListOfVotos(String nombre) {
+        int numVotos = 0;
+        try {
+            PreparedStatement pStatement = con.prepareStatement("SELECT * FROM Jugadores WHERE nombre = ?");
+            pStatement.setString(1, nombre);
+            rs = pStatement.executeQuery();
+            while (rs.next()) {
+                numVotos = rs.getInt("votos");
+            }
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            // No lee de la tabla
+            logger.info("No lee de la tabla");
+            logger.error(MESSAGE_ERROR, e.getMessage());
+        }
+        logger.info("El número de votos del jugador {} es {}", nombre, numVotos);
+        return numVotos;
     }
 }
