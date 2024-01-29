@@ -135,8 +135,8 @@ public class ModeloDatos implements DataService {
     @Override
     public int getListOfVotos(String nombre) {
         int numVotos = 0;
-        try {
-            PreparedStatement pStatement = con.prepareStatement("SELECT * FROM Jugadores WHERE nombre = ?");
+        try ( PreparedStatement pStatement = con.prepareStatement("SELECT * FROM Jugadores WHERE nombre = ?")){
+
             pStatement.setString(1, nombre);
             rs = pStatement.executeQuery();
             while (rs.next()) {
