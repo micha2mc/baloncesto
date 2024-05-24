@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: descargar repostorio
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: pruebas-unitarias
         run: mvn test
       - name: compilar la aplicación sin repetir pruebas
@@ -17,7 +17,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: descargar repostorio
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: instalar aplicación en Tomcat
         run: |
           mvn package -DskipTests=true
@@ -51,7 +51,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Descargar repositorio
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Crear el archivo .war
         run: |
           mvn package -DskipTests=true
@@ -73,7 +73,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Descargar repositorio
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Crear el archivo .war
         run: |
           mvn package -DskipTests=true
